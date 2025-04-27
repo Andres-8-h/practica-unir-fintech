@@ -16,3 +16,9 @@ python3 main.py words.txt yes yes
 
 # Ordenar palabras del archivo my_words.txt y mantener duplicados
 python3 main.py my_words.txt no
+
+# Leer words.txt, eliminar duplicados, convertir a mayúsculas y filtrar palabras de al menos 6 caracteres
+python3 main.py words.txt yes yes 6
+
+# Frecuencia de palabras. 
+python3 main.py words.txt yes yes

@@ -9,7 +9,7 @@ import sys
 DEFAULT_FILENAME = "words.txt"
 DEFAULT_DUPLICATES = False
 DEFAULT_UPPERCASE = False
-
+DEFAULT_MIN_LENGTH = 0 
 
 def sort_list(items, ascending=True):
     if not isinstance(items, list):
@@ -27,10 +27,23 @@ def convert_to_uppercase(items):
     return [word.upper() for word in items]
 
 
+def filter_by_min_length(items, min_length):
+    """Filtra las palabras que tienen una longitud mayor o igual a min_length"""
+    return [word for word in items if len(word) >= min_length]
+
+def count_word_frequencies(items):
+    """Cuenta la frecuencia de cada palabra en la lista"""
+    frequencies = {}
+    for word in items:
+        frequencies[word] = frequencies.get(word, 0) + 1
+    return frequencies
+
+
 if __name__ == "__main__":
     filename = DEFAULT_FILENAME
     remove_duplicates = DEFAULT_DUPLICATES
     convert_uppercase = DEFAULT_UPPERCASE
+     min_length = DEFAULT_MIN_LENGTH
     
     if len(sys.argv) >= 3:
         filename = sys.argv[1]
@@ -60,5 +73,13 @@ if __name__ == "__main__":
         
     if convert_uppercase:
         word_list = convert_to_uppercase(word_list)
+    if min_length > 0:
+        word_list = filter_by_min_length(word_list, min_length)   
+    
+    print("\nFrecuencia de palabras:")
+    frequencies = count_word_frequencies(word_list)
+    for word, count in frequencies.items():
+        print(f"{word}: {count}")
+
 
     print(sort_list(word_list))
